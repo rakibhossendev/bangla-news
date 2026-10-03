@@ -13,7 +13,7 @@ export interface NavCategoriesType{
     data: NavCategoriesItemType[]
 }
 
-export interface MarqueTextDataType{
+export interface CommonDataType{
     id: string;
     title: string;
     description: string;
