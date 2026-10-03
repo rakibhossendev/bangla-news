@@ -1,9 +1,9 @@
 import MarqueeText from "react-marquee-text"
 import "react-marquee-text/dist/styles.css"
-import type { MarqueTextDataType } from "@/app/TypeScript/NavCategories"
+import type { CommonDataType } from "@/app/TypeScript/NavCategories"
 import Link from "next/link";
 
-const headerDataAPIPromise = async (): Promise<MarqueTextDataType[]> => {
+const headerDataAPIPromise = async (): Promise<CommonDataType[]> => {
     const response = await fetch("https://news-api-v2.vercel.app/api/news?limit=10");
     const data = await response.json();
 
