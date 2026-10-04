@@ -15,7 +15,7 @@ export default function NavCategories({data}: NavCategoriesTypeProps){
         <div className="overflow-x-auto scrollbar-hide">
             <ul className="flex gap-6 mt-3 justify-center min-w-max pb-1">
                 <li><Link className={`${pathname === "/" ? "text-[#C10007]":""}`} href="/">হোম</Link></li>
-                {filteredCategories.map((item,index) => <li key={index}><Link className={`${pathname === item.slug ? "text-[#C10007]": ""}`} href={item.slug}>{item.title}</Link></li>)}
+                {filteredCategories.map((item,index) => <li key={index}><Link className={`${pathname === `/categories/${item.slug}` ? "text-[#C10007]": ""}`} href={`/categories/${item.slug}`}>{item.title}</Link></li>)}
             </ul>
             
         </div>
