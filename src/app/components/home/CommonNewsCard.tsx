@@ -1,5 +1,6 @@
 import { CommonDataType } from "@/app/TypeScript/NavCategories"
 import Image from "next/image"
+import Link from "next/link"
 
 interface CommonNewsCardDataTypeProps{
     data: CommonDataType
@@ -10,6 +11,7 @@ export default function CommonNewsCard({data}: CommonNewsCardDataTypeProps) {
 
     return (
         <div className="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-red-500 hover:shadow-md">
+            <Link href={`/article/${data.id}`}>
             <div className="overflow-hidden">
                 <Image className="w-full object-cover transition-transform duration-500 group-hover:scale-105" src={data.imageUrl}  width={400} height={250} alt={data.imageAlt} />
             </div>
@@ -20,6 +22,7 @@ export default function CommonNewsCard({data}: CommonNewsCardDataTypeProps) {
                 <p className="mt-2 line-clamp-2 text-sm leading-6 text-gray-600">{data.description}</p>
                 <p className="mt-1 border-t border-gray-100 pt-3 text-xs text-gray-400">{new Date(data.lastPublished).toLocaleDateString("bn-BD",{dateStyle: "full", timeZone:"Asia/Dhaka"})}</p>
             </div>
+            </Link>
         </div>
     )
 }

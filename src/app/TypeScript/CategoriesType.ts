@@ -1,3 +1,4 @@
+
 export interface CategoriesDataType{
     category: string;
     description: string;
@@ -11,5 +12,12 @@ export interface CategoriesDataType{
     source: string;
     title: string;
     type: string; 
+}
+
+
+export interface CategoriesResponseType{
+    page: number;
+    pageCount: number;
+    data: CategoriesDataType[];
 }
 

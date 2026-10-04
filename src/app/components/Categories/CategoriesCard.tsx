@@ -1,5 +1,6 @@
 import { CategoriesDataType } from "@/app/TypeScript/CategoriesType"
 import Image from "next/image"
+import Link from "next/link"
 
 interface CategoriesDataTypeProps{
     data: CategoriesDataType
@@ -10,6 +11,7 @@ export default function CategoriedCard({data}: CategoriesDataTypeProps) {
 
     return (
         <div className="group cursor-pointer overflow-hidden rounded-xl border border-gray-200 bg-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md">
+            <Link href={`/article/${data.id}`}>
             <div className="relative overflow-hidden">
                 <Image width={600} height={400} className="h-56 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 sm:h-64" src={data.imageUrl} alt={data.imageAlt} />
                 <span className="absolute bottom-3 left-3 rounded-md bg-red-600 px-2.5 py-1 text-xs font-semibold text-white shadow-sm">{data.category}</span>
@@ -25,6 +27,7 @@ export default function CategoriedCard({data}: CategoriesDataTypeProps) {
                 </div>
 
             </div>
+            </Link>
         </div>
     )
 }
