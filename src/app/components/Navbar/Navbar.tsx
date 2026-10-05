@@ -3,6 +3,7 @@ import Image from "next/image";
 import navLogo from "@/assets/logo.webp"
 import NavCategories from "./NavCategories";
 import { NavCategoriesType } from "@/app/TypeScript/NavCategories";
+import Link from "next/link";
 
 
 const categoriesResponse = async (): Promise<NavCategoriesType> => {
@@ -14,7 +15,7 @@ const categoriesResponse = async (): Promise<NavCategoriesType> => {
 
 export default async function Navbar() {
     const data = await categoriesResponse()
-  
+
 
     const options: Intl.DateTimeFormatOptions = {
         weekday: "long",
@@ -27,30 +28,46 @@ export default async function Navbar() {
     return (
         <nav className="container mx-auto px-4">
             <section className="relative">
-                <div className="flex items-center justify-center">
 
-                    {/* Logo + Title - Always Center */}
-                    <div className="flex gap-2 items-center justify-center">
-                        <Image src={navLogo} alt="bangla news logo" loading="eager" className="w-10 h-auto" />
+                {/* Header */}
+                <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
 
-                        <div>
-                            <h1 className="text-2xl font-bold text-[#C10007]">Bangla News</h1>
-                            <p className="text-sm">{today}</p>
+                    {/* Logo + Title */}
+                    <div className="flex items-center justify-center sm:flex-1">
+                        <Image
+                            src={navLogo}
+                            alt="bangla news logo"
+                            loading="eager"
+                            className="w-9 sm:w-10 h-auto"
+                        />
+
+                        <div className="ml-2">
+                            <h1 className="text-xl sm:text-2xl font-bold text-[#C10007]">
+                                Bangla News
+                            </h1>
+                            <p className="text-xs sm:text-sm">{today}</p>
                         </div>
                     </div>
 
-                    {/* Sign in / Sign up - Right */}
-                    <div className="absolute right-0 flex items-center">
-                        <button className="mx-4 cursor-pointer">সাইন ইন</button>
-                        <button className="bg-[#C10007] text-white rounded px-3 text-sm cursor-pointer hover:bg-[#95050a] py-2">সাইন আপ</button>
+                    {/* Sign in / Sign up */}
+                    <div className="flex items-center justify-center gap-2 sm:absolute sm:right-0">
+                        <button className="cursor-pointer px-2 sm:px-3">
+                            সাইন ইন
+                        </button>
+
+                        <Link href="/sign-up">
+                            <button className="rounded bg-[#C10007] px-3 py-2 text-sm text-white cursor-pointer hover:bg-[#95050a]">
+                                সাইন আপ
+                            </button>
+                        </Link>
                     </div>
 
                 </div>
 
-                <NavCategories data={data}/>
+                {/* Categories */}
+                <NavCategories data={data} />
 
             </section>
-
         </nav>
     )
 }
