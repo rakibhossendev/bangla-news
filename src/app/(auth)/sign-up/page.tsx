@@ -22,7 +22,7 @@ export default function SignUp() {
         const getUserData = Object.fromEntries(getFormData.entries()) as unknown as SignUpDataType;
 
 
-        const { data, error } = await signUp.email({
+        const {error } = await signUp.email({
             name: getUserData.name,
             email: getUserData.email,
             password: getUserData.password,
@@ -60,46 +60,16 @@ export default function SignUp() {
 
                 
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="email" className="text-sm font-medium">
-                            ইমেইল
-                        </label>
-
-                        <input
-                            id="email"
-                            type="email"
-                            name="email"
-                            required
-                            pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
-                            title="সঠিক ইমেইল দিন"
-                            className="rounded-md border border-gray-300 px-3 py-2 outline-none transition focus:border-red-700 focus:ring-1 focus:ring-red-700"
-                        />
+                        <label htmlFor="email" className="text-sm font-medium">ইমেইল</label>
+                        <input id="email" type="email" name="email" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$" title="সঠিক ইমেইল দিন" className="rounded-md border border-gray-300 px-3 py-2 outline-none transition focus:border-red-700 focus:ring-1 focus:ring-red-700"/>
                     </div>
 
                     {/* Password */}
                     <div className="flex flex-col gap-2">
-                        <label htmlFor="password" className="text-sm font-medium">
-                            পাসওয়ার্ড
-                        </label>
-
-                        <input
-                            id="password"
-                            type="password"
-                            name="password"
-                            required
-                            pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$"
-                            title="পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে এবং অন্তত ১টি letter ও ১টি number থাকতে হবে"
-                            className="rounded-md border border-gray-300 px-3 py-2 outline-none transition focus:border-red-700 focus:ring-1 focus:ring-red-700"
-                        />
+                        <label htmlFor="password" className="text-sm font-medium">পাসওয়ার্ড</label>
+                        <input id="password" type="password" name="password" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে এবং অন্তত ১টি letter ও ১টি number থাকতে হবে" className="rounded-md border border-gray-300 px-3 py-2 outline-none transition focus:border-red-700 focus:ring-1 focus:ring-red-700"/>
                     </div>
-
-                    {/* Submit */}
-                    <button
-                        type="submit"
-                        className="mt-2 rounded-md bg-red-700 py-2.5 font-medium text-white transition hover:bg-red-800"
-                    >
-                        সাইন আপ
-                    </button>
-
+                    <button type="submit" className="mt-2 rounded-md bg-red-700 py-2.5 font-medium text-white transition hover:bg-red-800">সাইন ইন</button>
                 </form>
             </div>
         </section>

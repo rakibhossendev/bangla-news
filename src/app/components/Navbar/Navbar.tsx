@@ -4,6 +4,7 @@ import navLogo from "@/assets/logo.webp"
 import NavCategories from "./NavCategories";
 import { NavCategoriesType } from "@/app/TypeScript/NavCategories";
 import Link from "next/link";
+import AuthButton from "./AuthButton";
 
 
 const categoriesResponse = async (): Promise<NavCategoriesType> => {
@@ -26,48 +27,32 @@ export default async function Navbar() {
     const today = new Intl.DateTimeFormat("bn-BD", options).format(new Date());
 
     return (
-        <nav className="container mx-auto px-4">
-            <section className="relative">
 
-                {/* Header */}
-                <div className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+<nav className="container mx-auto px-4">
+    <section className="relative">
 
-                    {/* Logo + Title */}
-                    <div className="flex items-center justify-center sm:flex-1">
-                        <Image
-                            src={navLogo}
-                            alt="bangla news logo"
-                            loading="eager"
-                            className="w-9 sm:w-10 h-auto"
-                        />
-
-                        <div className="ml-2">
-                            <h1 className="text-xl sm:text-2xl font-bold text-[#C10007]">
-                                Bangla News
-                            </h1>
-                            <p className="text-xs sm:text-sm">{today}</p>
-                        </div>
-                    </div>
-
-                    {/* Sign in / Sign up */}
-                    <div className="flex items-center justify-center gap-2 sm:absolute sm:right-0">
-                        <button className="cursor-pointer px-2 sm:px-3">
-                            সাইন ইন
-                        </button>
-
-                        <Link href="/sign-up">
-                            <button className="rounded bg-[#C10007] px-3 py-2 text-sm text-white cursor-pointer hover:bg-[#95050a]">
-                                সাইন আপ
-                            </button>
-                        </Link>
-                    </div>
-
+        <div className="flex items-center justify-between gap-3 py-4">
+            
+            <div className="flex min-w-0 items-center gap-2 sm:flex-1 sm:justify-center">
+                <Image src={navLogo} alt="Bangla News logo" loading="eager" className="h-auto w-9 sm:w-10"/>
+                
+                <div className="ml-1 sm:ml-2">
+                    <h1 className="text-lg font-bold text-[#C10007] sm:text-2xl">Bangla News</h1>
+                    <p className="text-[11px] sm:text-sm">{today}</p>
                 </div>
+            </div>
 
-                {/* Categories */}
-                <NavCategories data={data} />
+            {/* Auth */}
+            <div className="shrink-0">
+                <AuthButton />
+            </div>
+        </div>
 
-            </section>
-        </nav>
+        {/* Categories */}
+        <NavCategories data={data} />
+
+    </section>
+</nav>
+
     )
 }
