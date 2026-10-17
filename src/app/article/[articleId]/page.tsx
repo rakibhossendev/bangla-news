@@ -1,9 +1,12 @@
 
 import { NewsDetailsType } from "@/app/TypeScript/NewsDetailsType";
+import { incrementView } from "@/lib/views";
 import Image from "next/image";
+import { after } from "next/server";
 
 export default async function ArticleDetails({ params }: { params: Promise<{ articleId: string }> }) {
     const { articleId } = await params;
+    after(() => incrementView(articleId));
     const response = await fetch(`https://news-api-v2.vercel.app/api/article/${articleId}`)
     const newsDetails: NewsDetailsType = await response.json();
 

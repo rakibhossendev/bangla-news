@@ -2,12 +2,14 @@
 import { CommonDataType } from "@/app/TypeScript/NavCategories";
 import Image from "next/image";
 import Link from "next/link";
+import ViewCount from "../ViewCount";
 
 export interface MainNewsDataProps {
     data: CommonDataType[]
+    views?: Record<string, number>
 }
 
-export default function MainNewtsCard({ data }: MainNewsDataProps) {
+export default function MainNewtsCard({ data, views }: MainNewsDataProps) {
     const firstNews = data[0];
 
 
@@ -24,8 +26,9 @@ export default function MainNewtsCard({ data }: MainNewsDataProps) {
                 <h1 className="line-clamp-2 text-xl font-bold leading-7 text-gray-900 transition-colors duration-200 group-hover:text-red-600 sm:text-2xl sm:leading-8">{firstNews.title}</h1>
                 <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{firstNews.description}</p>
 
-                <div className="mt-4 border-t border-gray-100 pt-3">
+                <div className="mt-4 flex items-center justify-between gap-2 border-t border-gray-100 pt-3">
                     <p className="text-xs text-gray-400">{new Date(firstNews.lastPublished).toLocaleDateString("bn-BD", {dateStyle: "full",timeZone: "Asia/Dhaka",})}</p>
+                    <ViewCount views={views?.[firstNews.id]} className="shrink-0 text-xs text-gray-400" />
                 </div>
 
             </div>

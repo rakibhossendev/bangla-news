@@ -1,5 +1,6 @@
 import CategoriedCard from "@/app/components/Categories/CategoriesCard";
 import { CategoriesResponseType } from "@/app/TypeScript/CategoriesType";
+import { getViews } from "@/lib/views";
 import Link from "next/link";
 
 const categoriesDataResponse = async (categoriesId: string,page: number): Promise<CategoriesResponseType> => {
@@ -18,6 +19,7 @@ export default async function CategoriedByData({ params, searchParams }: { param
     const {page} = await searchParams;
     const currentPage = Number(page) || 1
     const dataByCategories = await categoriesDataResponse(categoriesId,currentPage);
+    const views = await getViews(dataByCategories.data.map((item) => item.id));
 
     console.log(currentPage);
 
@@ -25,7 +27,7 @@ export default async function CategoriedByData({ params, searchParams }: { param
         <section className="container mx-auto mt-5 ">
             
             <div className="grid grid-cols-1 gap-4 px-3 sm:grid-cols-2 sm:px-4 lg:grid-cols-3 lg:gap-5 lg:px-0">
-            {dataByCategories.data.map((data) => (<CategoriedCard key={data.id} data={data}/>))}
+            {dataByCategories.data.map((data) => (<CategoriedCard key={data.id} data={data} views={views[data.id]} />))}
 
             </div>
 

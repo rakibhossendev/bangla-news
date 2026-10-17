@@ -1,12 +1,14 @@
 import { CategoriesDataType } from "@/app/TypeScript/CategoriesType"
 import Image from "next/image"
 import Link from "next/link"
+import ViewCount from "../ViewCount";
 
 interface CategoriesDataTypeProps{
     data: CategoriesDataType
+    views?: number
 }
 
-export default function CategoriedCard({data}: CategoriesDataTypeProps) {
+export default function CategoriedCard({data, views}: CategoriesDataTypeProps) {
 
 
     return (
@@ -22,8 +24,9 @@ export default function CategoriedCard({data}: CategoriesDataTypeProps) {
                 <h1 className="line-clamp-2 text-xl font-bold leading-7 text-gray-900 transition-colors duration-200 group-hover:text-red-600 sm:text-2xl sm:leading-8">{data.title}</h1>
                 <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">{data.description}</p>
 
-                <div className="mt-4 border-t border-gray-100 pt-3">
+                <div className="mt-4 flex items-center justify-between gap-2 border-t border-gray-100 pt-3">
                     <p className="text-xs text-gray-400">{new Date(data.lastPublished).toLocaleDateString("bn-BD",{dateStyle: "full",timeZone: "Asia/Dhaka"})}</p>
+                    <ViewCount views={views} className="shrink-0 text-xs text-gray-400" />
                 </div>
 
             </div>

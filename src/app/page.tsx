@@ -4,6 +4,7 @@ import MainNewtsListCard from "./components/home/MainNewsListCard";
 import MostReadedNewsCard from "./components/home/MostReadedNewscard";
 import NewsSectionCard from "./components/home/NewsSection";
 import { HomeNewsDatatType, MostReadedDataType } from "./TypeScript/homePageType";
+import { getViews } from "@/lib/views";
 
 
 const homeNewPromise = async (): Promise<HomeNewsDatatType[]> => {
@@ -34,6 +35,14 @@ export default async function Home() {
   const videos = newsData[8];
   const othersNews = newsData[9]
 
+  const articleIds = [
+    ...new Set([
+      ...newsData.flatMap((section) => section.articles.map((article) => article.id)),
+      ...mostReadedNews.map((article) => article.id),
+    ]),
+  ];
+  const views = await getViews(articleIds);
+
   return (
 
     <section className="container mx-auto mt-5 px-3 sm:px-4 lg:px-0">
@@ -44,22 +53,22 @@ export default async function Home() {
         <div className="lg:col-span-2">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
 
-            <MainNewsCard data={mainNews} />
+            <MainNewsCard data={mainNews} views={views} />
 
             <div className="border border-gray-300 bg-white p-4 grid gap-3 rounded-xl">
-              {someMainNews.map((item) => (<MainNewtsListCard key={item.id} data={item} />))}
+              {someMainNews.map((item) => (<MainNewtsListCard key={item.id} data={item} views={views[item.id]} />))}
             </div>
           </div>
 
           {/* Selected News */}
 
-          <NewsSectionCard title={selectedNews.title} articles={selectedNews.articles} />
-          <NewsSectionCard title={bangladeshNews.title} articles={bangladeshNews.articles} />
-          <NewsSectionCard title={indianNews.title} articles={indianNews.articles} />
-          <NewsSectionCard title={world.title} articles={world.articles} />
-          <NewsSectionCard title={health.title} articles={health.articles} />
-          <NewsSectionCard title={videos.title} articles={videos.articles} />
-          <NewsSectionCard title={othersNews.title} articles={othersNews.articles} />
+          <NewsSectionCard title={selectedNews.title} articles={selectedNews.articles} views={views} />
+          <NewsSectionCard title={bangladeshNews.title} articles={bangladeshNews.articles} views={views} />
+          <NewsSectionCard title={indianNews.title} articles={indianNews.articles} views={views} />
+          <NewsSectionCard title={world.title} articles={world.articles} views={views} />
+          <NewsSectionCard title={health.title} articles={health.articles} views={views} />
+          <NewsSectionCard title={videos.title} articles={videos.articles} views={views} />
+          <NewsSectionCard title={othersNews.title} articles={othersNews.articles} views={views} />
 
 
         </div>
@@ -67,7 +76,7 @@ export default async function Home() {
 
         {/* Most Readed News */}
         <div>
-          <MostReadedNewsCard mostReadedNewsData={mostReadedNews} />
+          <MostReadedNewsCard mostReadedNewsData={mostReadedNews} views={views} />
         </div>
 
 

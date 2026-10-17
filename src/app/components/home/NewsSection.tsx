@@ -4,9 +4,10 @@ import CommonNewsCard from "./CommonNewsCard";
 export interface NewsSectionDataTypeProps {
     articles: CommonDataType[];
     title: string;
+    views?: Record<string, number>;
 }
 
-export default function NewsSectionCard({ articles, title }: NewsSectionDataTypeProps) {
+export default function NewsSectionCard({ articles, title, views }: NewsSectionDataTypeProps) {
 
     return (
         <section className="mt-10">
@@ -21,6 +22,7 @@ export default function NewsSectionCard({ articles, title }: NewsSectionDataType
                     <CommonNewsCard
                         key={data.id}
                         data={data}
+                        views={views?.[data.id]}
                     />
                 ))}
             </div>
